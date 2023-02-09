@@ -3,6 +3,14 @@
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
   </header>
+  
+  <div>
+    <div class="order-item-container">
+    <% @order.line_items.each do |item| %>
+      Line-item: <%= item.id %>
+    <% end %>
+    </div>
+  </div>
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
