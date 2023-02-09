@@ -1,0 +1,53 @@
+  <article class="order-item-container">
+  <div>
+    <% @order.line_items.each do |item| %>
+      <div class="display-6">
+        <strong>Line-item: </strong> <%= item.id %>
+      </div>
+      <div>
+        <img class="order-img" src="<%= item.product.image %>">
+      </div>
+      <div>
+        <strong>
+          Item:
+        </strong> <%= item.product.name %>
+      </div>
+      <div>
+        <strong>
+          Description:
+        </strong> <%= item.product.description %>
+      </div>
+      <div>
+        <strong>
+          Qty:
+        </strong> <%= item.quantity %>
+      </div>
+      <div>
+        <strong>
+          Line-item Price:
+        </strong> <%= humanized_money_with_symbol item.item_price %>
+      </div>
+      <div>
+        <strong>
+        Line item Total:
+        </strong> 
+        <%= humanized_money_with_symbol item.total_price %> 
+      </div>
+      <p>
+    <% end %>
+  </div>
+</article>
+  <div>
+  <strong>
+    Your Total: 
+  </strong>
+    <%= humanized_money_with_symbol @order.total%>
+    
+  </div>
+  <div>
+    <strong>
+      Email used to order: 
+    </strong>
+      <%= @order.email %>
+  </div>
+  <p>
