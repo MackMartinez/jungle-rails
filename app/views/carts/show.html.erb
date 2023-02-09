@@ -1,3 +1,6 @@
+<%if enhanced_cart.product.first %>
+
+
 <section class="cart-show">
 
   <header class="page-header">
@@ -50,3 +53,7 @@
   </div>
 
 </section>
+<% else %>
+  <div class="alert alert-danger"> Your cart is empty. </div>
+  <div class="cart-empty"> Click <%= link_to 'Home', :root %> to add items to your cart! </div>
+<% end %>
