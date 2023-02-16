@@ -1,10 +1,32 @@
 <h1>Welcome to the Admin Dashboard</h1>
 
-<p>
-  Total number of products:
-  <%= @product_count %>
+<p class="lead">
+  Here is a quick summary of the total products and categories of our store.
 </p>
-<p>
-  Total number of catergories:
-  <%= @category_count %>
-</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">
+        <%= link_to 'Products', [:admin, :products] %>
+      </th>
+      <td> 
+        <%= @product_count %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        Categories
+      </th>
+      <td>
+        <%= @category_count %>
+      </td>
+    </tr>
+  </tbody>
+</table>
