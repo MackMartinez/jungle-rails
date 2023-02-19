@@ -30,11 +30,15 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end
 
-
     it 'should not create a user if email is already taken' do
       @user1 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
       @user2 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
       expect(@user2).not_to be_valid
+    end
+
+    it 'should not create a user if password is less than 3 characters' do
+      @user1 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '12', password_confirmation: '12'})
+      expect(@user1).not_to be_valid
     end
   end
 end
