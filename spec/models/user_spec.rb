@@ -41,4 +41,16 @@ RSpec.describe User, type: :model do
       expect(@user1).not_to be_valid
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'should authenticate a user based on their email and passsword' do
+      user = User.create({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
+      expect(user).to eql(User.authenticate_with_credentials('jack@testmail.com', '123'))
+    end
+
+    it 'should authenticate a user if the email has trailing spaces' do
+      user = User.create({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
+      expect(user).to eql(User.authenticate_with_credentials(' jack@testmail.com ', '123'))
+    end
+  end
 end
