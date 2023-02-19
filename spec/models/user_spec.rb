@@ -12,9 +12,10 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
-    it 'should not create a user if no e-mail is entered' do
-      @user = User.new({name: nil, email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
-      expect(@user).not_to be_valid
+    it 'should not create a user if email is already taken' do
+      @user1 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
+      @user2 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
+      expect(@user2).not_to be_valid
     end
   end
 end
