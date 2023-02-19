@@ -12,6 +12,25 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+    it 'should not create a user if password is missing' do
+      @user = User.new({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: nil, password_confirmation: '123'})
+      @user.save
+      expect(@user.errors.full_messages).to include("Password can't be blank")
+    end
+
+    it 'should not create a user if password_confirmation is missing' do
+      @user = User.new({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: nil})
+      @user.save
+      expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
+    end
+
+    it 'should not create a user if email is missing' do
+      @user = User.new({ name: 'Jack Sparrow', email: nil, password: '123', password_confirmation: '123'})
+      @user.save
+      expect(@user.errors.full_messages).to include("Email can't be blank")
+    end
+
+
     it 'should not create a user if email is already taken' do
       @user1 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
       @user2 = User.create({name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
