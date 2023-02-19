@@ -52,5 +52,10 @@ RSpec.describe User, type: :model do
       user = User.create({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
       expect(user).to eql(User.authenticate_with_credentials(' jack@testmail.com ', '123'))
     end
+
+    it 'should authenticate a user if the email has varying cases' do
+      user = User.create({ name: 'Jack Sparrow', email: 'jack@testmail.com', password: '123', password_confirmation: '123'})
+      expect(user).to eql(User.authenticate_with_credentials(' jAck@tEstmail.com ', '123'))
+    end
   end
 end
